@@ -1,0 +1,11 @@
+A = [int(a) for a in input().split()]
+n = A[0]
+
+card = 0
+for i in range(1, n + 1):
+  card ^= i
+
+for i in range(1, n):
+  card ^= A[i]
+
+print(card)
