@@ -1,0 +1,9 @@
+list = [int(a) for a in input().split()]
+
+for i in range(len(list)):
+    count = 0
+    for j in range(len(list)):
+        if list[i] == list[j]:
+            count += 1
+    if count == 1:
+        print(list[i], end = ' ')
