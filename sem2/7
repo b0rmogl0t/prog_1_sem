@@ -1,0 +1,16 @@
+num = input().split()
+
+maxfr = 0
+frnum = 1
+for n1 in num:
+    fr = 0
+
+    for n2 in num:
+        if n1 == n2:
+            fr += 1
+
+    if fr > maxfr:
+        maxfr = fr
+        frnum = n1
+
+print(frnum)
