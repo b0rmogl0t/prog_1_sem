@@ -1,0 +1,10 @@
+A = input().split()
+n = int(A[0])
+str = A[1]
+#print(A)
+rts = ''
+for i in range(0, len(str), n):
+    part = str[i: i + n]
+    rts += part[::-1]
+
+print(rts)
