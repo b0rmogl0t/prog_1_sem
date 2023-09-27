@@ -1,0 +1,34 @@
+A = list(map(int,input().split()))
+a = A[0]
+b = A[1]
+
+
+def nod(a,b):
+    while a != 0 and b != 0:
+        if a >= b:
+            a -= b
+        else:
+            b -= a
+    return a or b
+
+
+def evklid(l, m):
+    d = nod(l, m)
+    c = max(l, m)
+    min = 2 * c + 1
+    x = y = 2 * c
+
+    for i in range(-c, c):
+        for j in range(-c, c):
+            if i * a + j * b == d:
+                if (abs(i) + abs(j)) < min:
+                    min = abs(i) + abs(j)
+                    x = i
+                    y = j
+                if (abs(i) + abs(j)) == min:
+                    if i < x:
+                        x = i
+                        y = j
+    print(x, y, d)
+
+evklid(a, b)
