@@ -1,0 +1,20 @@
+A = list(map(int,input().split()))
+n, b, c = A[0], A[1], A[2]
+
+
+ans_n = ""
+n = str(n)
+ten_n = 0
+d = len(n) - 1
+
+for i in n:
+    ten_n += int(i) * (b ** d)
+    d -= 1
+
+n = ten_n
+
+while n != 0:
+    ans_n = str(n%c) + ans_n
+    n //= c
+
+print(ans_n)
