@@ -1,0 +1,12 @@
+def prime_div(n, div=2):
+    if div > n:
+        return []
+    else:
+        if n % div == 0:
+            return [div] + prime_div(n // div, div)
+        else:
+            return prime_div(n, div + 1)
+
+
+num = int(input())
+print(prime_div(num, 2))
