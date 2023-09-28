@@ -1,0 +1,7 @@
+N = list(map(int,input().split()))
+
+mult = 1
+for num in N:
+    mult *= num
+sr_geom = mult ** (1 / len(N))
+print(sr_geom)
