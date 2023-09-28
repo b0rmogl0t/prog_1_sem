@@ -1,0 +1,7 @@
+from statistics import mean
+
+
+def least_squares(x, y):
+    k = (sum([x * y for x, y in zip(x, y)]) - mean(y) * sum(x)) / (sum([x**2 for x in x]) - mean(x) * sum(x))
+    b = mean(y) - k * mean(x)
+    return print('k =', k, 'b =', b)
