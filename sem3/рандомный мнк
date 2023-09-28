@@ -1,0 +1,15 @@
+from random import gauss
+from statistics import mean
+import matplotlib.pyplot as plt
+
+
+def random_least_squares(N):
+    x = [x for x in range(0, 2 * N, 2)]
+    y = [k * 15.3487 + gauss(34.0, 70.5) for k in x]
+    k = (sum([x * y for x, y in zip(x, y)]) - mean(y) * sum(x)) / (sum([x**2 for x in x]) - mean(x) * sum(x))
+    b = mean(y) - k * mean(x)
+
+    return k, b
+
+n = int(input())
+print(random_least_squares(n))
