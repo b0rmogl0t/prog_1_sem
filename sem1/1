@@ -1,0 +1,7 @@
+A = list(map(int,input().split()))
+a = A[0]
+b = A[1]
+
+print(a + b)
+print(a - b)
+print(a * b)
