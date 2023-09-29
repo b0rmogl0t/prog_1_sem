@@ -1,0 +1,41 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv('D:/User/Documents/учеба/вуз/iris_data.csv')
+species = data['Species'].tolist()
+petal_len = data['PetalLengthCm'].tolist()
+
+species_control = set(species)
+
+dig1 = []
+for name in species_control:
+    c = 0
+    for i in range(len(species)):
+        if species[i] == name:
+            c += 1
+    dig1.append(c)
+
+fig, ax = plt.subplots()
+plt.pie(dig1, labels=species_control)
+
+plt.title('species % diagram')
+
+plt.show()
+
+c1, c2, c3 = 0, 0, 0
+for len in petal_len:
+    if len < 1.2:
+        c1 += 1
+    elif 1.2 <= len < 1.5:
+        c2 += 1
+    else:
+        c3 += 1
+
+dig2 = [c1, c2, c3]
+
+fig, ax = plt.subplots()
+plt.pie(dig2, labels=['< 1.2 sm', '1.2 sm < x < 1.5 sm', '> 1.5 sm'])
+
+plt.title('petal length diagram')
+
+plt.show()
