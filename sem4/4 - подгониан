@@ -1,0 +1,61 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import pandas as pd
+from statistics import mean
+
+data = pd.read_csv('D:/User/Documents/учеба/вуз/iris_data.csv')
+species = data['Species'].tolist()
+petal_len = data['PetalLengthCm'].tolist()
+petal_width = data['PetalWidthCm'].tolist()
+sepal_len = data['SepalLengthCm'].tolist()
+sepal_width = data['SepalWidthCm'].tolist()
+
+
+
+fig = plt.figure(figsize = (10,16),dpi=100 )
+
+ax1 = fig.add_subplot(321) 
+ax2 = fig.add_subplot(322)
+ax3 = fig.add_subplot(323) 
+ax4 = fig.add_subplot(324)
+ax5 = fig.add_subplot(325) 
+ax6 = fig.add_subplot(326)
+
+ax1.plot(sepal_len, sepal_width,'r.' )
+ax1.set_xlabel('SepalLengthCm')
+ax1.set_ylabel('SepalWidthCm')
+
+ax2.plot(sepal_len, petal_len,'r.' )
+ax2.set_xlabel('SepalLengthCm')
+ax2.set_ylabel('PetalLengthCm')
+
+ax3.plot(sepal_len, petal_width,'r.' )
+ax3.set_xlabel('SepalLengthCm')
+ax3.set_ylabel('PetalWidthCm')
+
+ax4.plot(sepal_width, petal_len,'r.' )
+ax4.set_xlabel('SepalWidthCm')
+ax4.set_ylabel('PetalLengthCm')
+
+ax5.plot(sepal_width, petal_width,'r.' )
+ax5.set_xlabel('SepalWidthCm')
+ax5.set_ylabel('PetalWidthCm')
+
+def least_squares(xdata, ydata):
+    a = (sum([x * y for x, y in zip(xdata, ydata)]) - mean(ydata) * sum(xdata)) / (sum([x**2 for x in xdata]) - mean(xdata) * sum(xdata))
+    b = mean(ydata) - a * mean(xdata)
+    return a, b
+
+a, b = least_squares(petal_len, petal_width)
+
+#a,b - коэфы для прямой
+
+ax6.plot(petal_len,petal_width,'r.' )
+x = np.linspace(1,8,100)
+y = a*x+b
+ax6.plot(x,y);
+ax6.set_xlabel('PetalLengthCm')
+ax6.set_ylabel('PetalWidthCm')
+
+plt.show()
