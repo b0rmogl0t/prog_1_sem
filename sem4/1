@@ -1,0 +1,41 @@
+from random import gauss
+from statistics import mean
+import matplotlib.pyplot as plt
+x = [x / 15 for x in range(0, 300, 10)]
+y = [c * 9.81 + gauss(20, 9.5) for c in x]
+
+with open('lab.txt', 'w') as fout:
+    fout.write('d_l_mm P_N\n')
+    for i in range(len(x)):
+        fout.write(f'{x[i]} {y[i]}\n')
+
+
+with open('lab.txt', 'r') as fin:
+    data = fin.readlines()
+
+
+
+d_l = [float(line.split()[0]) for line in data[1:]]
+force = [float(line.split()[1]) for line in data[1:]]
+
+
+def least_squares(xdata, ydata):
+    a = (sum([x * y for x, y in zip(xdata, ydata)]) - mean(ydata) * sum(xdata)) / (sum([x**2 for x in xdata]) - mean(xdata) * sum(xdata))
+    b = mean(ydata) - a * mean(xdata)
+    return a, b
+
+
+
+a, b = least_squares(d_l, force)
+
+fig, ax = plt.subplots()
+#ax.plot(d_l, force, 'x')
+
+xdata = list(range(0, 21))
+ax.plot(xdata, [a * x + b for x in xdata])
+ax.errorbar(d_l, force, yerr=4.5, xerr = 0.25, color = 'k', linestyle = 'None')
+ax.set_xlabel('удлиннение l, мм')
+ax.grid()
+ax.set_ylabel('сила P, Н')
+plt.savefig('fig1.png')
+plt.show()
