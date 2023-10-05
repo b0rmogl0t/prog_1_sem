@@ -1,0 +1,23 @@
+import string
+
+
+with open("D:/User/Documents/учеба/вуз/питон.txt") as f:
+    text = f.read()
+
+
+for punc in string.punctuation:
+    if punc in text:
+        text.replace(punc, '')
+
+words = text.lower().split()
+word_count = {}
+
+for word in words:
+    if word in word_count:
+        word_count[word] += 1
+    else:
+        word_count[word] = 1
+
+frec = list(word_count)
+frec.sort(reverse = True)
+print(frec[:10])
