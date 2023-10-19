@@ -1,0 +1,37 @@
+import pandas as pd
+import tkinter as tk
+from tkinter import messagebox
+import random
+
+films = pd.read_csv('D:/User/Documents/учеба/вуз/imdb_top_250.csv')
+
+root = tk.Tk()
+root.title("Случайный фильм")
+
+
+def find_random_film():
+    selected_genre = entry.get()
+
+    filtered_films = films[
+        films['Genre'].str.lower().str.contains(selected_genre.lower(), case=False, na=False, regex=False)]
+
+    if filtered_films.empty:
+        messagebox.showinfo("Ошибка", "Нет фильмов с указанным жанром.")
+    else:
+        random_index = random.choice(filtered_films.index)
+        random_film = films.loc[random_index, 'Title']
+        messagebox.showinfo("Случайный фильм", f"Случайный фильм жанра '{selected_genre}':\n{random_film}")
+
+
+
+label = tk.Label(root, text="Введите жанр фильма:")
+label.pack()
+
+entry = tk.Entry(root)
+entry.pack()
+
+find_button = tk.Button(root, text="Найти случайный фильм", command=find_random_film)
+find_button.pack()
+
+
+root.mainloop()
