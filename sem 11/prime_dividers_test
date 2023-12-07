@@ -1,0 +1,38 @@
+import unittest
+
+
+def prime_div(n, div=2):
+    if not isinstance(n, int):
+        raise TypeError(f"prime_div does not support type {type(n)} in arguments")
+    if div > n:
+        return []
+    else:
+        if n % div == 0:
+            return [div] + prime_div(n // div, div)
+        else:
+            return prime_div(n, div + 1)
+
+
+class TestOrdinaryNumber(unittest.TestCase):
+    def test_prime_div(self):
+        self.assertEqual(prime_div(24, 2), [2, 2, 2, 3], "should be [2, 2, 2, 3]")
+
+class TestZero(unittest.TestCase):
+    def test_prime_div(self):
+        self.assertEqual(prime_div(0, 2), [], "0 has no prime dividers")
+
+class TestPrime(unittest.TestCase):
+    def test_prime_div(self):
+        self.assertEqual(prime_div(23, 2), [23], "should be 0")
+
+class TestOne(unittest.TestCase):
+    def test_prime_div(self):
+        self.assertEqual(prime_div(1, 2), [], "0 has no prime dividers")
+
+class TestAlwaysFAIL(unittest.TestCase):
+    def test_prime_div(self):
+        self.assertEqual(prime_div(3), [5], "should be 2 hehe")
+        
+        
+if __name__ == '__main__':
+    unittest.main()
