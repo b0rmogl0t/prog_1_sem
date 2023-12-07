@@ -20,7 +20,7 @@ class Caesar:
 
 
 def anti_caesar(cipher_text):
-    caesar = Caesar(key=0)  # При вызове указываем произвольный ключ, он не будет использоваться
+    caesar = Caesar(key=0)  
     for possible_key in range(len(caesar.alphabet)):
         decrypted_text = caesar.decode(cipher_text)
         print(f"Key {possible_key}: {decrypted_text}")
