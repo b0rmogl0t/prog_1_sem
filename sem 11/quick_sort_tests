@@ -1,0 +1,46 @@
+from random import randint
+import unittest
+
+def quick_sort(array):
+    for x in array:
+        if not isinstance(x, (int, float)):
+            raise TypeError(f"sorry can't sort {type(x)} arguments")
+
+    if len(array) < 2:
+        return array
+    else:
+        i = randint(0, len(array) - 1)
+        pivot = array[i]
+        del array[i]
+        left = [i for i in array if i < pivot]
+        right = [k for k in array if k >= pivot]
+        return quick_sort(left) + [pivot] + quick_sort(right)
+
+
+class TestEmptyArr(unittest.TestCase):
+    def test_quick_sort(self):
+        self.assertEqual(quick_sort([]), [], "should be []")
+
+
+class TestSortedArr(unittest.TestCase):
+    def test_quick_sort(self):
+        self.assertEqual(quick_sort([1, 2, 3, 5, 8]), [1, 2, 3, 5, 8], "should be [1, 2, 3, 5, 8]")
+
+
+class TestUnsortedArr(unittest.TestCase):
+    def test_quick_sort(self):
+        self.assertEqual(quick_sort([1, 10, 2, 8]), [1, 2, 8, 10], "should be [1, 2, 8, 10]")
+
+
+class TestDublItems(unittest.TestCase):
+    def test_quick_sort(self):
+        self.assertEqual(quick_sort([3, 8, 4, 8, 12]), [3, 4, 8, 8, 12], "should be [3, 4, 8, 8, 12]")
+
+
+class TestNegativeItems(unittest.TestCase):
+    def test_quick_sort(self):
+        self.assertEqual(quick_sort([-2, -4, 1, -12]), [-12, -4, -2, 1], "should be [[-12, -4, -2, 1]]")
+
+
+if __name__ == '__main__':
+    unittest.main()
